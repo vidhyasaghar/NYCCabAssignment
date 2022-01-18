@@ -1,0 +1,9 @@
+{
+	"name": "ADFTaxiCabSolution1",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "eab9e486-370b-48af-aae0-b20832c19689",
+		"tenantId": "1cd7644c-80ab-4bed-a8ab-c54e660b8c38"
+	}
+}
