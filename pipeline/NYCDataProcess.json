@@ -1,5 +1,5 @@
 {
-	"name": "SetFileName",
+	"name": "NYCDataProcess",
 	"properties": {
 		"activities": [
 			{
@@ -79,6 +79,60 @@
 							]
 						}
 					]
+				}
+			},
+			{
+				"name": "NYCDataIngestion",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "NYCCabDataLoad",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/NYCYellowDataIntegration/NYCYellowCabIntegration"
+				},
+				"linkedServiceName": {
+					"referenceName": "NYCDataProcess",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "NYCDataInsight",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "NYCDataIngestion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/NYCYellowDataIntegration/NYCYellowCabInsight"
+				},
+				"linkedServiceName": {
+					"referenceName": "NYCDataProcess",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
