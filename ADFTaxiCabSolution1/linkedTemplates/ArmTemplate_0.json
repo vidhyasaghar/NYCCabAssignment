@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'NYCBlobStorage'"
 		},
+		"NYCDataProcess_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'NYCDataProcess'"
+		},
 		"NYCYellowCabData_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://s3.amazonaws.com/nyc-tlc/trip+data/"
@@ -29,6 +33,24 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('NYCBlobStorage_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NYCDataProcess')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-4994364907739590.10.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('NYCDataProcess_accessToken')]"
+					},
+					"existingClusterId": "0118-211127-b22hs46e"
 				}
 			},
 			"dependsOn": []
@@ -188,7 +210,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SetFileName')]",
+			"name": "[concat(parameters('factoryName'), '/NYCDataProcess')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -272,6 +294,60 @@
 								}
 							]
 						}
+					},
+					{
+						"name": "NYCDataIngestion",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "NYCCabDataLoad",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/NYCYellowDataIntegration/NYCYellowCabIntegration"
+						},
+						"linkedServiceName": {
+							"referenceName": "NYCDataProcess",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "NYCDataInsight",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "NYCDataIngestion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/NYCYellowDataIntegration/NYCYellowCabInsight"
+						},
+						"linkedServiceName": {
+							"referenceName": "NYCDataProcess",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -307,6 +383,7 @@
 				"lastPublishTime": "2022-01-18T19:08:47Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/NYCDataProcess')]",
 				"[concat(variables('factoryId'), '/datasets/NYCYelloCabDataSource')]",
 				"[concat(variables('factoryId'), '/datasets/NYCBlobStageIN')]"
 			]

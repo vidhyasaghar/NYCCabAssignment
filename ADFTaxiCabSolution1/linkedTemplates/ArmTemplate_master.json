@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'NYCBlobStorage'"
 		},
+		"NYCDataProcess_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'NYCDataProcess'"
+		},
 		"NYCYellowCabData_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://s3.amazonaws.com/nyc-tlc/trip+data/"
@@ -44,6 +48,9 @@
 					},
 					"NYCBlobStorage_connectionString": {
 						"value": "[parameters('NYCBlobStorage_connectionString')]"
+					},
+					"NYCDataProcess_accessToken": {
+						"value": "[parameters('NYCDataProcess_accessToken')]"
 					},
 					"NYCYellowCabData_properties_typeProperties_url": {
 						"value": "[parameters('NYCYellowCabData_properties_typeProperties_url')]"

@@ -8,6 +8,9 @@
 		"NYCBlobStorage_connectionString": {
 			"value": ""
 		},
+		"NYCDataProcess_accessToken": {
+			"value": ""
+		},
 		"NYCYellowCabData_properties_typeProperties_url": {
 			"value": "https://s3.amazonaws.com/nyc-tlc/trip+data/"
 		}
