@@ -1,7 +1,7 @@
 # NYCCabAssignment
 Assignment to find insight in NYC Cab data
 
-Dataset is extracted from (https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+Dataset is extracted from (https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)<br>
 Only Yellow cab trip details for year 2020 was extracted
 
 ## Insights to be identified
