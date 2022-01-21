@@ -130,7 +130,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/NYCYellowDataIntegration/NYCYellowCabIntegration",
+							"notebookPath": "/Repos/vidhyasagharnsit@gmail.com/NYCCabAssignment/pyspark/NYCYellowCabIntegration",
 							"baseParameters": {
 								"YearFilter": {
 									"value": "@pipeline().parameters.NYCCabYear",
@@ -163,7 +163,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/NYCYellowDataIntegration/NYCYellowCabInsight"
+							"notebookPath": "/Repos/vidhyasagharnsit@gmail.com/NYCCabAssignment/pyspark/NYCYellowCabInsight"
 						},
 						"linkedServiceName": {
 							"referenceName": "NYCDataProcess",
