@@ -130,7 +130,13 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/NYCYellowDataIntegration/NYCYellowCabIntegration"
+							"notebookPath": "/NYCYellowDataIntegration/NYCYellowCabIntegration",
+							"baseParameters": {
+								"YearFilter": {
+									"value": "@pipeline().parameters.NYCCabYear",
+									"type": "Expression"
+								}
+							}
 						},
 						"linkedServiceName": {
 							"referenceName": "NYCDataProcess",
