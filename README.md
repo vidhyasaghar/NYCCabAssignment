@@ -1,7 +1,7 @@
 # NYCCabAssignment
 Assignment to find insight in NYC Cab data
 
-Dataset is extracted from (https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+Dataset is extracted from (https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)<br>
 Only Yellow cab trip details for year 2020 was extracted
 
 ## Insights to be identified
@@ -22,7 +22,7 @@ Technology stack
 ### ADF parameters and variables used
 ```
 Variable : NYCCabMonth=["01","02","03","04","05","06","07","08","09","10","11","12"]
-Parameter : NYCCabYear=202 (Passed during runtime)
+Parameter : NYCCabYear=2020 (Passed during runtime)
 ```
 ### Ingestion into BLOB
 
