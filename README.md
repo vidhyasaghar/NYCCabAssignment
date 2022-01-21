@@ -49,7 +49,7 @@ Load the parquet into blob container
 Read the parquet file and get insights
 Connect to Azure SQL server with credentials from key vault and load the insight into a mutable table, meaning the table will be recreated with each load
 
-### Azure Functions(Python)
+### Azure Functions(NYCCabAPI)
 
 Building API to extract insights with following endpoints
 ```
